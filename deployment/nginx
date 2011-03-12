@@ -1,0 +1,19 @@
+server {
+	server_name *.uvar.si;
+	rewrite ^ http://uvar.si$request_uri permanent;
+}
+
+server {
+	server_name uvar.si;
+
+	location / {
+		uwsgi_pass unix:/home/uvar/envs/uvar/run/uwsgi.sock;
+		include /etc/nginx/uwsgi_params;
+	}
+                
+	location /static {
+		root /home/uvar/envs/uvar;
+		autoindex on;
+	}
+}
+

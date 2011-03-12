@@ -55,11 +55,9 @@ class Recipe(mongoengine.Document):
         mongoengine.StringField()
     )
     language = mongoengine.StringField()
-    owners = mongoengine.ListField(
-        mongoengine.IntField()
-    )
+    owner = mongoengine.StringField()
 
-    def per_user(self, user_id):
-        return mongoengine.QuerySet().find(owners__contains=user_id)
+    def per_user(self, username):
+        return mongoengine.QuerySet().find(owner=username)
 
 

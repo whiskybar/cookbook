@@ -3,7 +3,7 @@
 import os
 import os.path
 
-PROJECT_ROOT = os.path.dirname(os.path.basename(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

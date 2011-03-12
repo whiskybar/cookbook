@@ -2,4 +2,52 @@
 
 {% block content %}
 <h2>{{ recipe }}</h2>
+
+<div id="recipe-detail">
+
+{% if recipe.perex %}
+<div class="perex">{{ recipe.perex }}</div>
+{% endif %}
+
+{% if recipe.ingredients %}
+<div class="ingredients">
+	<ul>
+	{% for ing_group in ingredients %}
+		<li>
+			<h3>{{ ingr_group.title }}</h3>
+			<ul>
+			{% for ingr in ingr_group.ingredients %}
+				<li>{{ ingr }}</li>
+			{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+{% endif %}
+
+{% if recipe.procedure %}
+<div class="procedure">{{ recipe.procedure }}</div>
+{% endif %}
+
+{% if recipe.notes %}
+<div class="notes">{{ recipe.notes }}</div>
+{% endif %}
+
+{% if recipe.source %}
+<div class="source">{{ recipe.source }}</div>
+{% endif %}
+
+{% if recipe.tags %}
+<div class="tags">
+	<ul>
+	{% for tag in recipe.tags %}
+		<li>{{ tag }}</li>
+	{% endfor %}
+	</ul>
+</div>
+{% endif %}
+
+</div>
+
 {% endblock %}

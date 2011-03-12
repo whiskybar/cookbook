@@ -3,6 +3,10 @@ body {
 	font-size: 10pt;
 }
 
+a, a:visited, a:active {
+    color: blue;
+}
+
 #header {
 	margin-bottom: 20px;
 }
@@ -17,4 +21,5 @@ body {
 
 #content h2 {
 	font-size: 13pt;
+	margin-bottom: 15px;
 }

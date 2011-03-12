@@ -54,7 +54,7 @@ class Recipe(mongoengine.Document):
     tags = mongoengine.ListField(
         mongoengine.StringField()
     )
-    language = mongoengine.StringField()
+    language = mongoengine.StringField(choices=settings.LANGUAGES)
     owner = mongoengine.StringField()
 
     def per_user(self, username):

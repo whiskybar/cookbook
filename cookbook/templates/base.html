@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Uvař.si</title>
+	<script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery-1.5.1.min.js"></script>
+</head>
+
+<body>
+
+<div id="header">
+	<h1>Uvař.si</h1>
+</div>
+
+<div id="content">
+	{% block content %}{% endblock %}
+</div>
+
+<div id="footer">
+	&copy; {% now "Y" %}
+</div>
+
+</body>
+
+</html>

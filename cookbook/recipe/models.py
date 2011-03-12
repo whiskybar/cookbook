@@ -57,8 +57,8 @@ class Recipe(mongoengine.Document):
     tags = mongoengine.ListField(
         mongoengine.StringField()
     )
-    language = mongoengine.StringField(choices=settings.LANGUAGES)
-    owner = mongoengine.StringField()
+    language = mongoengine.StringField(choices=dict(settings.LANGUAGES).keys())
+    author = mongoengine.StringField()
 
     def __unicode__(self):
         return self.name

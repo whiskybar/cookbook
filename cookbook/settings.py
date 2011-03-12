@@ -158,5 +158,10 @@ LOGGING = {
     }
 }
 
-LANGUAGES = ['Čeština', 'Angličtina', 'Slovenština', 'Maďarština']
+LANGUAGES = (
+    ('CZ', 'Čeština'),
+    ('EN', 'Angličtina'),
+    ('SK', 'Slovenština'),
+    ('HU', 'Maďarština'),
+)
 

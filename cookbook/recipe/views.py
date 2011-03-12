@@ -13,9 +13,9 @@ def recipe_detail(request, username, recipe_slug):
 
 def recipe_add(request):
     if request.method == 'POST':
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save
+            form.save()
     else:
         form = RecipeForm()
     return render_to_response('recipe/recipe_add.html', {

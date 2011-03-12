@@ -8,12 +8,11 @@
 {% endif %}
 
 <form method="post">
-{% csrf_token %}
 <table>
 {{ form.as_table }}
 </table>
 
-<input type="submit" value="Přidej" />
+<input type="submit" value="Přidej">
 </form>
 
 {% endblock %}

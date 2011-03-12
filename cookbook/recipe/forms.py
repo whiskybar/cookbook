@@ -1,20 +1,23 @@
 from django.conf import settings
 from django import forms
 
+from cookbook.recipe.models import Recipe
+
 
 class RecipeForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    slug = forms.CharField(max_length=100)
-    perex = form.TextField(required=False)
-    ingredients = form.TextField(required=False)
-    procedure = form.TextField(required=False)
-    notes = form.TextField(required=False)
-    source = forms.CharField(max_length=100, required=False)
-    tags = form.TextField(required=False)
+    name = forms.CharField()
+    slug = forms.CharField()
+    perex = forms.CharField(required=False, widget=forms.Textarea)
+    ingredients = forms.CharField(required=False, widget=forms.Textarea)
+    procedure = forms.CharField(required=False, widget=forms.Textarea)
+    notes = forms.CharField(required=False, widget=forms.Textarea)
+    source = forms.CharField(required=False)
+    tags = forms.CharField(required=False, widget=forms.Textarea)
     language = forms.ChoiceField(choices=zip(settings.LANGUAGES, settings.LANGUAGES))
 
     def __init__(self, *args, **kwargs):
         self.instance = kwargs.pop('instance', Recipe())
+        self.instance.owner = self.user = kwargs.pop('user', self.instance.owner)
         initial = {
             'name': self.instance.name,
             'slug': self.instance.slug,

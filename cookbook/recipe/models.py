@@ -1,7 +1,8 @@
-from django.db import models
-from django.conf import settings
-
 import mongoengine
+
+from django.conf import settings
+from django.core.urlresolvers import reverse
+
 
 """
 recipes = [
@@ -31,6 +32,7 @@ recipes = [
     }
 ]
 """
+
 mongoengine.connect(settings.MONGO_DB_NAME)
 
 
@@ -60,4 +62,7 @@ class Recipe(mongoengine.Document):
     def per_user(self, username):
         return mongoengine.QuerySet().find(owner=username)
 
+    def get_absolute_url(self):
+        url_kwargs = dict(username=self.owner, recipe_slug=self.slug)
+        return reverse('recipe_detail', kwargs=url_kwargs)
 

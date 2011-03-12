@@ -1,4 +1,5 @@
 import mongoengine
+from mongoengine.queryset import queryset_manager
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -35,12 +36,12 @@ recipes = [
 
 mongoengine.connect(settings.MONGO_DB_NAME)
 
-
 class IngredientGroup(mongoengine.EmbeddedDocument):
     title = mongoengine.StringField()
     ingredients = mongoengine.ListField(
         mongoengine.StringField()
     )
+
 
 
 class Recipe(mongoengine.Document):
@@ -59,8 +60,8 @@ class Recipe(mongoengine.Document):
     language = mongoengine.StringField(choices=settings.LANGUAGES)
     owner = mongoengine.StringField()
 
-    def per_user(self, username):
-        return mongoengine.QuerySet().find(owner=username)
+    def __unicode__(self):
+        return self.name
 
     def get_absolute_url(self):
         url_kwargs = dict(username=self.owner, recipe_slug=self.slug)

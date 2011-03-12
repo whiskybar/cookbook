@@ -7,7 +7,7 @@ from cookbook.recipe.models import Recipe
 
 def user_homepage(request, username):
     user = get_object_or_404(User, username=username)
-    recipes = Recipe.per_user(user.username)
+    recipes = Recipe.objects.filter(owner=user.username)
 
     context = dict(user=user, recipes=recipes)
-    return direct_to_template(request, context, 'user/user_homepage.html')
+    return direct_to_template(request, 'user/user_homepage.html', context)

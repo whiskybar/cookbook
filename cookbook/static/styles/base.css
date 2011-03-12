@@ -8,9 +8,13 @@ body {
 }
 
 #header h1 {
-	font-size: 15pt;
+	font-size: 17pt;
 }
 
 #footer {
 	margin-top: 20px;
+}
+
+#content h2 {
+	font-size: 13pt;
 }

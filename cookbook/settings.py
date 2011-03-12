@@ -3,7 +3,7 @@
 import os
 import os.path
 
-PROJECT_ROOT = os.path.dirname(os.path.basename(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -42,7 +42,7 @@ CACHES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Prague'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

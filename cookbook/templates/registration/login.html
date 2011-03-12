@@ -21,7 +21,11 @@
 
 	<div>
 		<input type="submit" value="Přihlásit">
-		<input type="hidden" name="next" value="{{ next|default:'/' }}">
+		{% if next %}
+			<input type="hidden" name="next" value="{{ next }}">
+		{% else %}
+			<input type="hidden" name="next" value="{% url go_home %}">
+		{% endif %}
 	</div>
 </form>
 

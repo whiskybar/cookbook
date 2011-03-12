@@ -1,14 +1,18 @@
-from django.views.generic.simple import direct_to_template
-from django.shortcuts import render_to_response
+from django.template.response import TemplateResponse
+from django.http import Http404
 
 from cookbook.recipe.models import Recipe
 from cookbook.recipe.forms import RecipeForm
 
 
 def recipe_detail(request, username, recipe_slug):
-    recipe = Recipe.objects.get(owner=username, slug=recipe_slug)
+    try:
+        recipe = Recipe.objects.get(owner=username, slug=recipe_slug)
+    except Recipe.DoesNotExist:
+        raise Http404('No recipe matches the given query.')
+
     context = dict(recipe=recipe)
-    return direct_to_template(request, 'recipe/recipe_detail.html', context)
+    return TemplateResponse(request, 'recipe/detail.html', context)
 
 
 def recipe_add(request):
@@ -18,6 +22,8 @@ def recipe_add(request):
             form.save()
     else:
         form = RecipeForm()
-    return render_to_response('recipe/recipe_add.html', {
-        'form': form,
-    })
+    return TemplateResponse(
+        request,
+        'recipe/add.html',
+        { 'form': form, }
+    )

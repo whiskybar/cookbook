@@ -1,0 +1,15 @@
+[program:uvar.si]
+command=uwsgi-python2.6
+	--socket /home/uvar/envs/uvar/run/uwsgi.sock
+	--chmod-socket
+	--processes 2
+	--master
+	--home /home/uvar/envs/uvar
+	--module django.core.handlers.wsgi:WSGIHandler()
+environment=DJANGO_SETTINGS_MODULE='cookbook.settings'
+user=uvar
+autostart=true
+autorestart=true
+stdout_logfile=/home/uvar/envs/uvar/log/uwsgi.log
+stderr_logfile=/home/uvar/envs/uvar/log/uwsgi.err
+stopsignal=QUIT

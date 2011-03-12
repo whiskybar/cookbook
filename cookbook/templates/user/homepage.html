@@ -13,7 +13,7 @@
 	{% endfor %}
 </ul>
 {% else %}
-	<p>Zatím nemáte žádné recepty. <a href="{% url recipe_add %}">Přidejte recept</a>
+	<p>Zatím nemáte žádné recepty. <a href="{% url recipe_add user.username %}">Přidejte recept</a>
 	a zde najdete svou osobní kuchařku.</p>
 {% endif %}
 

@@ -7,7 +7,7 @@ def homepage(request):
     return TemplateResponse(request, template='content/homepage.html')
 
 
-def go_home(request):
+def dashboard(request):
     if request.user.is_authenticated():
         return redirect(reverse('user_homepage', kwargs=dict(username=request.user.username)))
     else:

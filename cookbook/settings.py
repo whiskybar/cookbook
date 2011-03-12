@@ -25,6 +25,13 @@ DATABASES = {
 
 MONGO_DB_NAME = 'cookbook'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -107,17 +114,20 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+# AUTHENTICATION_BACKENDS = (
+#     'mongoengine.django.auth.MongoEngineBackend',
+# )
+#
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     'cookbook.recipe',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

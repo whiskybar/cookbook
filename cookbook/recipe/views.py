@@ -2,21 +2,23 @@ from django.template.response import TemplateResponse
 from django.http import Http404
 from django.template.response import TemplateResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 from cookbook.recipe.models import Recipe
 from cookbook.recipe.forms import RecipeForm
 
 
-def recipe_detail(request, username, recipe_slug):
+def recipe_detail(request, author, slug):
     try:
-        recipe = Recipe.objects.get(owner=username, slug=recipe_slug)
+        recipe = Recipe.objects.get(author=author, slug=slug)
     except Recipe.DoesNotExist:
         raise Http404('No recipe matches the given query.')
     context = dict(recipe=recipe)
     return TemplateResponse(request, 'recipe/detail.html', context)
 
 
-#@login_required
+@login_required
 def recipe_edit(request, author, slug=None):
     if User.objects.get(username=author) != request.user:
         raise Http404()

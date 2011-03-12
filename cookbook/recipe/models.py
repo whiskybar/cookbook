@@ -64,6 +64,6 @@ class Recipe(mongoengine.Document):
         return self.name
 
     def get_absolute_url(self):
-        url_kwargs = dict(username=self.owner, recipe_slug=self.slug)
+        url_kwargs = dict(author=self.author, slug=self.slug)
         return reverse('recipe_detail', kwargs=url_kwargs)
 

@@ -23,7 +23,7 @@
 <div id="footer">
 	Uvař.si &copy; {% now "Y" %}
 {% if user.is_authenticated %}
-	| <a href="{% url go_home %}">Moje kuchařka</a>
+	| <a href="{% url dashboard %}">Moje kuchařka</a>
 	| <a href="{% url logout %}">Odhlásit</a>
 {% else %}
 	| <a href="{% url login %}">Přihlásit</a>

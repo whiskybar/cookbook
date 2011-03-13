@@ -12,9 +12,11 @@
 {% if recipe.ingredients %}
 <div class="ingredients">
 	<ul>
-	{% for ing_group in ingredients %}
+	{% for ingr_group in recipe.ingredients %}
 		<li>
-			<h3>{{ ingr_group.title }}</h3>
+			{% if ingr_group.title and recipe.ingredients|length > 1 %}
+				<h3>{{ ingr_group.title }}</h3>
+			{% endif %}
 			<ul>
 			{% for ingr in ingr_group.ingredients %}
 				<li>{{ ingr }}</li>

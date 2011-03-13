@@ -6,7 +6,10 @@ from fabric.context_managers import cd, prefix
 def deploy():
     with cd('~/uvar.si'):
         run('git pull')
-    with prefix('workon uvar'):
-        run('django-admin.py collectstatic --noinput')
-    run('supervisorctl uvar.si restart')
+    with prefix('export WORKON_HOME=~/envs'):
+        with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
+            with prefix('workon uvar'):
+                run('django-admin.py syncdb')
+                run('django-admin.py collectstatic --noinput')
+    run('supervisorctl restart uvar.si')
 

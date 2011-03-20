@@ -67,3 +67,6 @@ class Recipe(mongoengine.Document):
         url_kwargs = dict(author=self.author, slug=self.slug)
         return reverse('recipe_detail', kwargs=url_kwargs)
 
+    def get_edit_url(self):
+        url_kwargs = dict(author=self.author, slug=self.slug)
+        return reverse('recipe_edit', kwargs=url_kwargs)

@@ -18,6 +18,19 @@ $(function() {
 		}
 	});
 
+	$('<li>', {
+		'class': 'expand-all',
+		html: $('<a>', {
+			href: '#',
+			html: 'Rozbalit vše',
+			click: function() {
+				$inputs.closest('tr').fadeIn();
+				$(this).closest('ul').find('li').hide();
+				return false;
+			}
+		})
+	}).appendTo($menu);
+
 	function initField($input) {
 		var name = $input.attr('name'),
 		    $row = $input.closest('tr'),
@@ -60,15 +73,18 @@ $(function() {
 		$input.closest('td').append($toggle);
 	}
 
+	// hide field
 	$('#recipe-edit td a').click(function() {
 		$(this).data('$menuItem').fadeIn();
+		$menu.find('.expand-all').fadeIn();
 		$(this).closest('tr').hide();
 		return false;
 	});
 
+	// show field
 	$menu.find('a').click(function() {
 		$(this).data('$input').closest('tr').fadeIn();
-		$(this).hide();
+		$(this).closest('li').hide();
 		return false;
 	});
 });

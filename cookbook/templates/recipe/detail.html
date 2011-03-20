@@ -5,12 +5,17 @@
 
 <div id="recipe-detail">
 
+{% if owner %}
+	<p><a href="{% url recipe_edit recipe.author recipe.slug %}">Editovat recept</a></p>
+{% endif %}
+
 {% if recipe.perex %}
-<div class="perex">{{ recipe.perex }}</div>
+<div class="perex"><em>{{ recipe.perex }}</em></div>
 {% endif %}
 
 {% if recipe.ingredients %}
 <div class="ingredients">
+	<strong>Ingredience:</strong>
 	<ul>
 	{% for ingr_group in recipe.ingredients %}
 		<li>
@@ -29,19 +34,29 @@
 {% endif %}
 
 {% if recipe.procedure %}
-<div class="procedure">{{ recipe.procedure }}</div>
+<div class="procedure">
+	<strong>Postup:</strong>
+	<p>{{ recipe.procedure }}</p>
+</div>
 {% endif %}
 
 {% if recipe.notes %}
-<div class="notes">{{ recipe.notes }}</div>
+<div class="notes">
+	<strong>Poznámky:</strong>
+	<p>{{ recipe.notes }}</p>
+</div>
 {% endif %}
 
 {% if recipe.source %}
-<div class="source">{{ recipe.source }}</div>
+<div class="source">
+	<strong>Zdroj:</strong>
+	<p>{{ recipe.source }}</p>
+</div>
 {% endif %}
 
 {% if recipe.tags %}
 <div class="tags">
+	<strong>Štítky:</strong>
 	<ul>
 	{% for tag in recipe.tags %}
 		<li>{{ tag }}</li>

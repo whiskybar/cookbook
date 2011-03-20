@@ -24,7 +24,6 @@ class RecipeForm(forms.Form):
         else:
             self.instance = Recipe(author=self.author)
 
-        print dir(self.instance)
         initial = {
             'name': self.instance.name,
             'slug': self.instance.slug,
@@ -53,5 +52,5 @@ class RecipeForm(forms.Form):
             ingredientgroup = IngredientGroup(title='main')
         ingredientgroup.ingredients = self.cleaned_data.get('ingredients', '').split('\n')
         self.instance.ingredients = [ingredientgroup]
-        self.instance.tags = self.cleaned_data.get('tags', '').split('\n')
+        self.instance.tags = filter(bool, self.cleaned_data.get('tags', '').split('\n'))
         self.instance.save()

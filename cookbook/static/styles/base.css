@@ -57,14 +57,34 @@ input[type=submit] {
 	margin-top: 20px;
 }
 
-#content h2 {
+#sidebar {
+	float: right;
+	width: 150px;
+}
+
+#sidebar ul {
+	margin-bottom: 15px;
+}
+
+#sidebar li {
+	margin-bottom: 2px;
+}
+
+#content {
+	margin-right: 150px;
+}
+
+#content-wrapper {
+	max-width: 1200px;
+}
+
+#content-wrapper h2 {
 	font-weight: bold;
 	font-size: 14pt;
 	margin-bottom: 15px;
 }
 
-#content h3 {
-	/*font-weight: bold;*/
+#content-wrapper h3 {
 	font-style: italic;
 	font-size: 13pt;
 	margin-bottom: 8px;
@@ -81,10 +101,6 @@ input[type=submit] {
 }
 
 /* recipes editation */
-
-#recipe-edit {
-	margin-left: 120px;
-}
 
 #recipe-edit input[type=text],
 #recipe-edit textarea {
@@ -122,12 +138,7 @@ input[type=submit] {
 }
 
 #recipe-fields-menu {
-	margin-left: 10px;
 	float: left;
-}
-
-#recipe-fields-menu li {
-	margin-bottom: 5px;
 }
 
 #recipe-fields-menu .expand-all {
@@ -136,13 +147,22 @@ input[type=submit] {
 
 /* recipe - detail */
 
+#recipe-detail {
+	float: left;
+}
+
+#recipe-detail > *:first-child {
+	margin-top: 0;
+}
+
 #recipe-detail > * {
 	margin-top: 15px;
 	clear: both;
 }
 
 #recipe-body > div {
-	width: 490px;
+	width: 450px;
+	padding-right: 10px;
 }
 
 #recipe-body .ingredients,

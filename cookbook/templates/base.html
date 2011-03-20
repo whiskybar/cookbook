@@ -40,8 +40,18 @@
 </div>
 {% endif %}
 
+<div id="content-wrapper" class="clearfix">
+
+{% block page-header %}{% endblock %}
+
+<div id="sidebar">
+	{% block sidebar %}{% endblock %}
+</div>
+
 <div id="content">
 	{% block content %}{% endblock %}
+</div>
+
 </div>
 
 <div id="footer">

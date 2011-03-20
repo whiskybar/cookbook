@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
+{% block page-header %}
+	<h2>{{ recipe }}</h2>
+
+	{% if recipe.perex %}
+		<div class="perex"><em>{{ recipe.perex }}</em></div>
+	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+	{% if owner %}
+	<ul>
+		<li><a href="{% url recipe_edit recipe.author recipe.slug %}">Upravit recept</a></li>
+	</ul>
+	{% endif %}
+{% endblock %}
+
 {% block content %}
-<h2>{{ recipe }}</h2>
 
 <div id="recipe-detail">
-
-{% if recipe.perex %}
-<div class="perex"><em>{{ recipe.perex }}</em></div>
-{% endif %}
 
 <div id="recipe-body" class="clearfix">
 
@@ -63,10 +74,6 @@
 	{% endfor %}
 	</ul>
 </div>
-{% endif %}
-
-{% if owner %}
-	<p><a href="{% url recipe_edit recipe.author recipe.slug %}">Upravit recept</a></p>
 {% endif %}
 
 </div>

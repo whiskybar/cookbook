@@ -43,5 +43,5 @@ def recipe_edit(request, author, slug=None):
 
     return TemplateResponse(request, 'recipe/edit.html', {
         'form': form,
-        'editation': bool(slug)
+        'editing': bool(slug)
     })

@@ -4,7 +4,6 @@ from django import forms
 
 from cookbook.recipe.models import Recipe, IngredientGroup
 
-
 class RecipeForm(forms.Form):
     name = forms.CharField(label='Název')
     slug = forms.CharField()
@@ -29,7 +28,7 @@ class RecipeForm(forms.Form):
             'slug': self.instance.slug,
             'perex': self.instance.perex,
             'ingredients': '\n'.join(self.instance.ingredients[0].ingredients)
-                           if getattr(self.instance, 'ingedients', None) else '',
+                           if getattr(self.instance, 'ingredients', None) else '',
             'procedure': self.instance.procedure,
             'notes': self.instance.notes,
             'source': self.instance.source,
@@ -50,7 +49,7 @@ class RecipeForm(forms.Form):
             ingredientgroup = self.instance.ingredients[0]
         else:
             ingredientgroup = IngredientGroup(title='main')
-        ingredientgroup.ingredients = self.cleaned_data.get('ingredients', '').split('\n')
+        ingredientgroup.ingredients = filter(bool, self.cleaned_data.get('ingredients', '').split('\n'))
         self.instance.ingredients = [ingredientgroup]
         self.instance.tags = filter(bool, self.cleaned_data.get('tags', '').split('\n'))
         self.instance.save()

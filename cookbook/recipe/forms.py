@@ -10,7 +10,7 @@ class RecipeForm(forms.Form):
     perex = forms.CharField(label='Podtitul', required=False, widget=forms.Textarea)
     ingredients = forms.CharField(label='Ingredience', required=False, widget=forms.Textarea)
     procedure = forms.CharField(label='Postup', required=False, widget=forms.Textarea)
-    notes = forms.CharField(label='Poznámky', required=False, widget=forms.Textarea)
+    notes = forms.CharField(label='Poznámka', required=False, widget=forms.Textarea)
     source = forms.CharField(label='Zdroj', required=False)
     tags = forms.CharField(label='Štítky', required=False, widget=forms.Textarea)
     language = forms.ChoiceField(label='Jazyk', choices=settings.LANGUAGES)

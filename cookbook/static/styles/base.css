@@ -63,6 +63,13 @@ input[type=submit] {
 	margin-bottom: 15px;
 }
 
+#content h3 {
+	/*font-weight: bold;*/
+	font-style: italic;
+	font-size: 13pt;
+	margin-bottom: 8px;
+}
+
 /* homepage */
 
 #my-recipes-header {
@@ -131,19 +138,16 @@ input[type=submit] {
 
 #recipe-detail > * {
 	margin-top: 15px;
-}
-
-#recipe-detail > div {
-	width: 450px;
-}
-
-#recipe-detail .ingredients,
-#recipe-detail .procedure {
-	float: left;
-}
-
-#recipe-detail p {
 	clear: both;
+}
+
+#recipe-body > div {
+	width: 490px;
+}
+
+#recipe-body .ingredients,
+#recipe-body .procedure {
+	float: left;
 }
 
 #recipe-detail ul ul li {

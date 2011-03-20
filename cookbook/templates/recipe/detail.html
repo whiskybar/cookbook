@@ -9,9 +9,11 @@
 <div class="perex"><em>{{ recipe.perex }}</em></div>
 {% endif %}
 
+<div id="recipe-body" class="clearfix">
+
 {% if recipe.ingredients %}
 <div class="ingredients">
-	<strong>Ingredience:</strong>
+	<h3>Ingredience:</h3>
 	<ul>
 	{% for ingr_group in recipe.ingredients %}
 		<li>
@@ -31,28 +33,30 @@
 
 {% if recipe.procedure %}
 <div class="procedure">
-	<strong>Postup:</strong>
+	<h3>Postup:</h3>
 	{{ recipe.procedure|linebreaks }}
 </div>
 {% endif %}
 
+</div>
+
 {% if recipe.notes %}
 <div class="notes">
-	<strong>Poznámky:</strong>
+	<h3>Poznámky:</h3>
 	{{ recipe.notes|linebreaks }}
 </div>
 {% endif %}
 
 {% if recipe.source %}
 <div class="source">
-	<strong>Zdroj:</strong>
+	<h3>Zdroj:</h3>
 	<p>{{ recipe.source|urlizetrunc:50 }}</p>
 </div>
 {% endif %}
 
 {% if recipe.tags %}
 <div class="tags">
-	<strong>Štítky:</strong>
+	<h3>Štítky:</h3>
 	<ul>
 	{% for tag in recipe.tags %}
 		<li>{{ tag }}</li>

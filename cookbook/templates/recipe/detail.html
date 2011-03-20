@@ -36,14 +36,14 @@
 {% if recipe.procedure %}
 <div class="procedure">
 	<strong>Postup:</strong>
-	<p>{{ recipe.procedure }}</p>
+	{{ recipe.procedure|linebreaks }}
 </div>
 {% endif %}
 
 {% if recipe.notes %}
 <div class="notes">
 	<strong>Poznámky:</strong>
-	<p>{{ recipe.notes }}</p>
+	{{ recipe.notes|linebreaks }}
 </div>
 {% endif %}
 

@@ -6,6 +6,8 @@
 
 <div id="my-recipes">
 
+<div id="my-recipes-header"><a href="{% url recipe_add user.username %}">Přidat recept</a></div>
+
 {% if recipes %}
 <ul>
 	{% for recipe in recipes %}

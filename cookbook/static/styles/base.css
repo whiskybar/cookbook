@@ -23,3 +23,46 @@ a, a:visited, a:active {
 	font-size: 13pt;
 	margin-bottom: 15px;
 }
+
+/* homepage */
+
+#my-recipes-header {
+	margin: 15px 0;
+}
+
+#my-recipes ul li {
+	list-style-type: disc inside;
+}
+
+/* recipes */
+
+#recipe-edit {
+	margin-left: 120px;
+}
+
+#recipe-edit .hide {
+	margin-left: 5px;
+	font-size: 9pt;
+}
+
+#recipe-edit th {
+	width: 100px;
+	text-align: right;
+	padding-right: 5px;
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+#recipe-edit tr {
+	margin-bottom: 10px;
+}
+
+#recipe-fields-menu {
+	margin-left: 10px;
+	float: left;
+}
+
+#recipe-fields-menu li {
+	list-style: disc inside;
+	margin-bottom: 5px;
+}

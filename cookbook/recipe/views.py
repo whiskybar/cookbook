@@ -35,7 +35,7 @@ def recipe_edit(request, author, slug=None):
             form.save()
             messages.success(request, "Recept byl úspěšně uložen.")
             url_kwargs = dict(author=request.user.username, slug=form.cleaned_data['slug'])
-            redirect(reverse('recipe_edit', kwargs=url_kwargs))
+            return redirect(reverse('recipe_edit', kwargs=url_kwargs))
         else:
             messages.error(request, "Opravte chyby.")
     else:

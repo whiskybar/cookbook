@@ -53,6 +53,20 @@ input[type=submit] {
 	padding-right: 8px;
 }
 
+#messages {
+	margin-bottom: 10px;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+#messages .success {
+	color: green;
+}
+
+#messages .error {
+	color: red;
+}
+
 #footer {
 	margin-top: 20px;
 }

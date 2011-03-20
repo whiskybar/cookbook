@@ -16,7 +16,18 @@
 <body>
 
 <div id="header">
-	<h1><a href="{% url homepage %}">Uvař.si</a></h1>
+	<h1><a href="{% url dashboard %}">Uvař.si</a></h1>
+</div>
+
+<div id="menu" class="clearfix">
+	<ul>
+	{% if user.is_authenticated %}
+		<li><a href="{% url dashboard %}">Moje kuchařka</a></li>
+		<li><a href="{% url recipe_add user.username %}">Vložit recept</a></li>
+		<li><a href="{% url logout %}">Odhlásit</a> ({{ user.username }})</li>
+	{% else %}
+		<li><a href="{% url login %}">Přihlásit</a></li>
+	{% endif %}
 </div>
 
 {% if messages %}
@@ -35,12 +46,6 @@
 
 <div id="footer">
 	Uvař.si &copy; {% now "Y" %}
-{% if user.is_authenticated %}
-	| <a href="{% url dashboard %}">Moje kuchařka</a>
-	| <a href="{% url logout %}">Odhlásit</a>
-{% else %}
-	| <a href="{% url login %}">Přihlásit</a>
-{% endif %}
 </div>
 
 </body>

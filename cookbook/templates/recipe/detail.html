@@ -5,10 +5,6 @@
 
 <div id="recipe-detail">
 
-{% if owner %}
-	<p><a href="{% url recipe_edit recipe.author recipe.slug %}">Editovat recept</a></p>
-{% endif %}
-
 {% if recipe.perex %}
 <div class="perex"><em>{{ recipe.perex }}</em></div>
 {% endif %}
@@ -50,7 +46,7 @@
 {% if recipe.source %}
 <div class="source">
 	<strong>Zdroj:</strong>
-	<p>{{ recipe.source }}</p>
+	<p>{{ recipe.source|urlizetrunc:30 }}</p>
 </div>
 {% endif %}
 
@@ -63,6 +59,10 @@
 	{% endfor %}
 	</ul>
 </div>
+{% endif %}
+
+{% if owner %}
+	<p><a href="{% url recipe_edit recipe.author recipe.slug %}">Upravit recept</a></p>
 {% endif %}
 
 </div>

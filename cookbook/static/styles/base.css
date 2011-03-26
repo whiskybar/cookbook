@@ -187,3 +187,14 @@ input[type=submit] {
 #recipe-detail ul ul li {
 	list-style: disc inside;
 }
+
+.gallery li {
+    list-style: none;
+    display: inline;
+}
+
+.gallery img {
+	border: 1px solid #BBBBBB;
+	margin: 7px 14px 7px 0;
+	padding: 5px;
+}

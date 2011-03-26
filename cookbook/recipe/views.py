@@ -45,3 +45,23 @@ def recipe_edit(request, author, slug=None):
         'form': form,
         'editing': bool(slug)
     })
+
+@login_required
+def recipe_delete(request, author, slug):
+    if User.objects.get(username=author) != request.user:
+        raise Http404('Toto není váš recept')
+    recipe = Recipe.objects.get(author=author, slug=slug)
+
+    if request.method == 'POST':
+        gallery = recipe.gallery
+        if gallery:
+            gallery.delete()
+        recipe.delete()
+        messages.info(request, 'Recept "%s" byl úspěšně smazán.' % recipe)
+        return redirect(reverse('user_homepage', kwargs={'username': author}))
+
+    return TemplateResponse(request, 'recipe/delete.html', {
+        'recipe': recipe,
+    })
+
+

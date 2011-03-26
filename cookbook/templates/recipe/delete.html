@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page-header %}
+	<h2>{{ recipe }}</h2>
+
+	{% if recipe.perex %}
+		<div class="perex"><em>{{ recipe.perex }}</em></div>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<p>Opravdu si přejete recept smazat?</p>
+<form method="post" id="recipe-delete">
+	{% csrf_token %}
+	<input type="submit" value="Smazat">
+</form>
+
+{% endblock %}

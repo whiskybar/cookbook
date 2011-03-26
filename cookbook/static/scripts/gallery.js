@@ -77,7 +77,7 @@ $(function() {
 		_.each(queue, function(f) {
 			$('<li>', {
 				html: $('<img>', {
-					src: f.getAsDataURL()
+					src: f.dataURL
 				}),
 				click: function() {
 					removeFromQueue(f);
@@ -97,16 +97,22 @@ $(function() {
 	function addToQueue(e) {
 		e.preventDefault();
 
+		var fr = new FileReader;
 		_.each(e.dataTransfer.files, function(f) {
 			if (_.indexOf(ALLOWED_TYPES, f.type) === -1) {
 				console.error('Sorry, file type not allowed.');
 				return;
 			}
 
-			queue.push(f);
+			fr.onloadend = function() {
+				//console.log(f, fr.result);
+				f.dataURL = fr.result;
+				queue.push(f);
+				renderQueue();
+			}
+			fr.readAsDataURL(f);
 		});
 
-		renderQueue();
 	}
 
 	function hintDropzone(e) {

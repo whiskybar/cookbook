@@ -1,20 +1,36 @@
 {% extends "base.html" %}
 
+{% block page-header %}
+	<h2>{{ recipe }}</h2>
+
+	{% if recipe.perex %}
+		<div class="perex"><em>{{ recipe.perex }}</em></div>
+	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+	{% if owner %}
+	<ul>
+		<li><a href="{% url recipe_edit recipe.author recipe.slug %}">Upravit recept</a></li>
+	</ul>
+	{% endif %}
+{% endblock %}
+
 {% block content %}
-<h2>{{ recipe }}</h2>
 
 <div id="recipe-detail">
 
-{% if recipe.perex %}
-<div class="perex">{{ recipe.perex }}</div>
-{% endif %}
+<div id="recipe-body" class="clearfix">
 
 {% if recipe.ingredients %}
 <div class="ingredients">
+	<h3>Ingredience:</h3>
 	<ul>
-	{% for ing_group in ingredients %}
+	{% for ingr_group in recipe.ingredients %}
 		<li>
-			<h3>{{ ingr_group.title }}</h3>
+			{% if ingr_group.title and recipe.ingredients|length > 1 %}
+				<h3>{{ ingr_group.title }}</h3>
+			{% endif %}
 			<ul>
 			{% for ingr in ingr_group.ingredients %}
 				<li>{{ ingr }}</li>
@@ -27,19 +43,31 @@
 {% endif %}
 
 {% if recipe.procedure %}
-<div class="procedure">{{ recipe.procedure }}</div>
+<div class="procedure">
+	<h3>Postup:</h3>
+	{{ recipe.procedure|linebreaks }}
+</div>
 {% endif %}
 
+</div>
+
 {% if recipe.notes %}
-<div class="notes">{{ recipe.notes }}</div>
+<div class="notes">
+	<h3>Poznámky:</h3>
+	{{ recipe.notes|linebreaks }}
+</div>
 {% endif %}
 
 {% if recipe.source %}
-<div class="source">{{ recipe.source }}</div>
+<div class="source">
+	<h3>Zdroj:</h3>
+	<p>{{ recipe.source|urlizetrunc:50 }}</p>
+</div>
 {% endif %}
 
 {% if recipe.tags %}
 <div class="tags">
+	<h3>Štítky:</h3>
 	<ul>
 	{% for tag in recipe.tags %}
 		<li>{{ tag }}</li>

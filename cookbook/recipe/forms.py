@@ -1,19 +1,19 @@
+#! -*- coding: utf-8 -*-
 from django.conf import settings
 from django import forms
 
 from cookbook.recipe.models import Recipe, IngredientGroup
 
-
 class RecipeForm(forms.Form):
-    name = forms.CharField()
+    name = forms.CharField(label='Název')
     slug = forms.CharField()
-    perex = forms.CharField(required=False, widget=forms.Textarea)
-    ingredients = forms.CharField(required=False, widget=forms.Textarea)
-    procedure = forms.CharField(required=False, widget=forms.Textarea)
-    notes = forms.CharField(required=False, widget=forms.Textarea)
-    source = forms.CharField(required=False)
-    tags = forms.CharField(required=False, widget=forms.Textarea)
-    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    perex = forms.CharField(label='Podtitul', required=False, widget=forms.Textarea)
+    ingredients = forms.CharField(label='Ingredience', required=False, widget=forms.Textarea)
+    procedure = forms.CharField(label='Postup', required=False, widget=forms.Textarea)
+    notes = forms.CharField(label='Poznámka', required=False, widget=forms.Textarea)
+    source = forms.CharField(label='Zdroj', required=False)
+    tags = forms.CharField(label='Štítky', required=False, widget=forms.Textarea)
+    language = forms.ChoiceField(label='Jazyk', choices=settings.LANGUAGES)
 
     def __init__(self, *args, **kwargs):
         self.author = kwargs.pop('author')
@@ -22,11 +22,13 @@ class RecipeForm(forms.Form):
             self.instance = Recipe.objects.get(author=self.author, slug=self.slug)
         else:
             self.instance = Recipe(author=self.author)
+
         initial = {
             'name': self.instance.name,
             'slug': self.instance.slug,
             'perex': self.instance.perex,
-            'ingredients': ''.join('\n'.join(group.ingredients for group in self.instance.ingredients)),
+            'ingredients': '\n'.join(self.instance.ingredients[0].ingredients)
+                           if getattr(self.instance, 'ingredients', None) else '',
             'procedure': self.instance.procedure,
             'notes': self.instance.notes,
             'source': self.instance.source,
@@ -47,7 +49,7 @@ class RecipeForm(forms.Form):
             ingredientgroup = self.instance.ingredients[0]
         else:
             ingredientgroup = IngredientGroup(title='main')
-        ingredientgroup.ingredients = self.cleaned_data.get('ingredients', '').split('\n')
+        ingredientgroup.ingredients = filter(bool, self.cleaned_data.get('ingredients', '').split('\n'))
         self.instance.ingredients = [ingredientgroup]
-        self.instance.tags = self.cleaned_data.get('tags', '').split('\n')
+        self.instance.tags = filter(bool, self.cleaned_data.get('tags', '').split('\n'))
         self.instance.save()

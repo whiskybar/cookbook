@@ -9,5 +9,7 @@ def user_homepage(request, username):
     user = get_object_or_404(User, username=username)
     recipes = Recipe.objects.filter(author=user.username)
 
-    context = dict(user=user, recipes=recipes)
+    owner = request.user and request.user.username == username
+
+    context = dict(user=user, recipes=recipes, owner=owner)
     return TemplateResponse(request, 'user/homepage.html', context)

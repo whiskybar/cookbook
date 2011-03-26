@@ -7,7 +7,7 @@ $(function() {
 	}
 
 	var ALLOWED_TYPES = ['image/png', 'image/jpg'],
-	    queue = [];
+	    queue = loadFromStorage();
 
 	function showUnsupportedError() {
 		$('<div>', {
@@ -74,12 +74,28 @@ $(function() {
 		return false;
 	}
 
+	function loadFromStorage() {
+		var len = parseInt(localStorage.getItem('queueLength')),
+		    queue = [];
+		for (var i = 0; i < len; i++) {
+			queue.push(localStorage.getItem('queueItem-' + (i+1)));
+		}
+		return queue;
+	}
+
+	function saveToStorage() {
+		localStorage.setItem('queueLength', queue.length);
+		_.each(queue, function(f, i) {
+			localStorage.setItem('queueItem-' + i, f);
+		});
+	}
+
 	function renderQueue() {
 		$list = $('<ul>');
 		_.each(queue, function(f) {
 			$('<li>', {
 				html: $('<img>', {
-					src: f.dataURL
+					src: f
 				}),
 				click: function() {
 					removeFromQueue(f);
@@ -87,6 +103,7 @@ $(function() {
 			}).appendTo($list);
 		});
 		$dropzone.find('.status').html($list);
+		saveToStorage();
 	}
 
 	function removeFromQueue(f) {
@@ -106,8 +123,8 @@ $(function() {
 
 			var fr = new FileReader;
 			fr.onloadend = function() {
-				f.dataURL = fr.result;
-				queue.push(f);
+				//f.dataURL = fr.result;
+				queue.push(fr.result);
 				renderQueue();
 			}
 			fr.readAsDataURL(f);
@@ -147,4 +164,6 @@ $(function() {
 	$('input:file').get(0).addEventListener('change', function(e) {
 		addToQueue(e.target.files)
 	}, false);
+
+	renderQueue(); //todo: remove;
 });

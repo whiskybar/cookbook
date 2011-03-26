@@ -60,7 +60,13 @@ $(function() {
 		var message = buildMultipartString(queue),
 		    xhr = new XMLHttpRequest();
 
-		xhr.open('POST', '/upload', true);
+		var uri = window.location.pathname;
+		uri = uri.substr(0, uri.length - 1).split('/');
+		uri.pop();
+		uri.push('upload', '');
+		uri = uri.join('/');
+
+		xhr.open('POST', uri, true);
 		xhr.setRequestHeader('content-type', 'multipart/form-data; boundary=' + message[0]);
 		xhr.sendAsBinary(message[1]);
 		return false;

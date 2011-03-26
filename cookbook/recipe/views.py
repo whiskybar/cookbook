@@ -6,6 +6,8 @@ from django.template.response import TemplateResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+
 
 from cookbook.recipe.models import Recipe
 from cookbook.recipe.forms import RecipeForm
@@ -22,6 +24,13 @@ def recipe_detail(request, author, slug):
         owner = False
     context = dict(recipe=recipe, owner=owner)
     return TemplateResponse(request, 'recipe/detail.html', context)
+
+
+@login_required
+@csrf_exempt
+def gallery_upload(request, author, slug):
+    from django.http import HttpResponse
+    return HttpResponse("hello world");
 
 
 @login_required

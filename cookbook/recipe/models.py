@@ -68,7 +68,10 @@ class Recipe(mongoengine.Document):
 
     @property
     def gallery(self):
-        return get_object_or_404(Gallery, pk=self.gallery_id)
+        try:
+            return Gallery.objects.get(pk=self.gallery_id)
+        except Gallery.DoesNotExist:
+            return None
 
     def get_absolute_url(self):
         url_kwargs = dict(author=self.author, slug=self.slug)

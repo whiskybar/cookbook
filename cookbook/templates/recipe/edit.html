@@ -11,6 +11,7 @@
 {% block sidebar %}
 	{% if editing %}
 	<ul>
+		<li><a href="{% url recipe_delete form.instance.author form.instance.slug %}">Smazat recept</a></li>
 		<li><a href="{{ form.instance.get_absolute_url }}">Prohlížet recept</a></li>
 	</ul>
 	{% endif %}

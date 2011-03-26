@@ -87,4 +87,6 @@ $(function() {
 		$(this).closest('li').hide();
 		return false;
 	});
+
+	$('.gallery a').fancybox();
 });

@@ -10,22 +10,27 @@
 	{% csrf_token %}
 	<table>
 		<tr>
-			<td>{{ form.username.label_tag }}</td>
+			<th>{{ form.username.label_tag }}</th>
 			<td>{{ form.username }}</td>
 		</tr>
 		<tr>
-			<td>{{ form.password.label_tag }}</td>
+			<th>{{ form.password.label_tag }}</th>
 			<td>{{ form.password }}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input type="submit" value="Přihlásit">
+				{% if next %}
+					<input type="hidden" name="next" value="{{ next }}">
+				{% else %}
+					<input type="hidden" name="next" value="{% url go_home %}">
+				{% endif %}
+			</td>
 		</tr>
 	</table>
 
 	<div>
-		<input type="submit" value="Přihlásit">
-		{% if next %}
-			<input type="hidden" name="next" value="{{ next }}">
-		{% else %}
-			<input type="hidden" name="next" value="{% url go_home %}">
-		{% endif %}
 	</div>
 </form>
 

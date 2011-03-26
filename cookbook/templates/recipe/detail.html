@@ -76,6 +76,20 @@
 </div>
 {% endif %}
 
+{% if recipe.gallery_id %}
+<div class="gallery">
+    <ul>
+        {% for photo in recipe.gallery.public %}
+        <li>
+            <a href="" rel="gallery-{{ recipe.gallery_id }}">
+                <img src="{{ photo.get_display_url }}">
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 </div>
 
 {% endblock %}

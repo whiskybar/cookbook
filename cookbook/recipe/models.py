@@ -1,8 +1,10 @@
 import mongoengine
 from mongoengine.queryset import queryset_manager
+from photologue.models import Gallery
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 
 
 """
@@ -57,11 +59,16 @@ class Recipe(mongoengine.Document):
     tags = mongoengine.ListField(
         mongoengine.StringField()
     )
+    gallery_id = mongoengine.IntField()
     language = mongoengine.StringField(choices=dict(settings.LANGUAGES).keys())
     author = mongoengine.StringField()
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def gallery(self):
+        return get_object_or_404(Gallery, pk=self.gallery_id)
 
     def get_absolute_url(self):
         url_kwargs = dict(author=self.author, slug=self.slug)

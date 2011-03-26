@@ -60,12 +60,12 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.expanduser('~/envs/uvar/media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory that holds static files.
 # Example: "/home/media/media.lawrence.com/static/"
@@ -129,6 +129,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'photologue',
+
     'cookbook.recipe',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -164,4 +166,5 @@ LANGUAGES = (
     ('SK', 'Slovenština'),
     ('HU', 'Maďarština'),
 )
+
 

@@ -1,0 +1,102 @@
+/* recipes editation */
+
+#recipe-edit input[type=text],
+#recipe-edit textarea {
+	width: 550px;
+}
+
+#recipe-edit textarea {
+	height: 150px;
+}
+
+#recipe-edit textarea[name=perex],
+#recipe-edit textarea[name=tags] {
+	height: 50px;
+}
+
+#recipe-edit textarea[name=notes] {
+	height: 70px;
+}
+
+#recipe-edit .hide {
+	margin-left: 5px;
+	font-size: 9pt;
+}
+
+#recipe-edit th {
+	width: 100px;
+	text-align: right;
+	padding-right: 5px;
+	vertical-align: top;
+	padding-top: 3px;
+}
+
+#recipe-edit td {
+	padding-bottom: 2px;
+}
+
+#recipe-fields-menu {
+	float: left;
+}
+
+#recipe-fields-menu .expand-all {
+	margin-top: 20px;
+}
+
+#gallery-upload {
+	margin: 15px 0 0 105px;
+	width: 350px;
+	height: 150px;
+	border: 1px solid silver;
+	padding: 10px;
+	position: relative;
+}
+
+#gallery-upload a {
+	position: absolute;
+	background-color: white;
+	padding: 7px;
+	bottom: 0;
+	right: 0;
+}
+
+#gallery-upload li {
+	float: left;
+	margin: 2px;
+}
+
+#gallery-upload img {
+	width: 50px;
+	height: 40px;
+	padding: 3px;
+	border: 1px solid #bbbbbb;
+}
+
+/* recipe - detail */
+
+#recipe-detail {
+	float: left;
+}
+
+#recipe-detail > *:first-child {
+	margin-top: 0;
+}
+
+#recipe-detail > * {
+	margin-top: 15px;
+	clear: both;
+}
+
+#recipe-body > div {
+	width: 450px;
+	padding-right: 10px;
+}
+
+#recipe-body .ingredients,
+#recipe-body .procedure {
+	float: left;
+}
+
+#recipe-detail ul ul li {
+	list-style: disc inside;
+}

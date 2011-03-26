@@ -1,4 +1,8 @@
 $(function() {
+	if (!$('#recipe-edit').length) {
+		return;
+	}
+
 	// do feature detection
 	var multipleUpload = !!$('<input type="file" multiple>').get(0).files;
 	if (!FileReader || (!Modernizr.draganddrop && !multipleUpload)) {

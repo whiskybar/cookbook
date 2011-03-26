@@ -1,5 +1,8 @@
 #! -*- coding: utf-8 -*-
-from django.http import Http404
+import os.path
+
+from django.conf import settings
+from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.template.response import TemplateResponse
@@ -7,11 +10,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-
+from django.template.defaultfilters import slugify
+from photologue.models import Gallery, Photo
 
 from cookbook.recipe.models import Recipe
 from cookbook.recipe.forms import RecipeForm
 
+
+def recipe_search(request):
+    query = request.GET and request.GET.get('q')
+    if query:
+        Recipe.objects.filter(name__icontains=query, slug__icontains=query)
+    #FIXME: continue
 
 def recipe_detail(request, author, slug):
     try:
@@ -29,9 +39,35 @@ def recipe_detail(request, author, slug):
 @login_required
 @csrf_exempt
 def gallery_upload(request, author, slug):
-    from django.http import HttpResponse
-    return HttpResponse("hello world");
+    if not request.FILES:
+        return Http404()
+    if User.objects.get(username=author) != request.user:
+        raise Http404('Toto není váš recept')
 
+    recipe = Recipe.objects.get(author=author, slug=slug)
+    gallery = Gallery.objects.get_or_create(
+        title='%s (%s)' % (slug, author),
+        title_slug='%s-%s' % (author, slug),
+    )[0]
+    for name, ufile in request.FILES.iteritems():
+        #TODO: refactor this ugly code
+        count = 1
+        while True:
+            title = '%s-%s' % (slug, count)
+            title_slug = slugify(title)
+            try:
+                Photo.objects.get(title_slug=title_slug)
+            except Photo.DoesNotExist:
+                break
+            count = count + 1
+
+        photo = Photo(title=title, title_slug=title_slug)
+        photo.image.save(ufile.name, ufile)
+        gallery.photos.add(photo)
+
+    recipe.gallery_id = gallery.pk
+    recipe.save()
+    return HttpResponse('ok')
 
 @login_required
 def recipe_edit(request, author, slug=None):

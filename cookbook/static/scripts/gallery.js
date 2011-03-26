@@ -1,5 +1,7 @@
 $(function() {
-	if (!FileReader || !Modernizr.draganddrop) {
+	// do feature detection
+	var multipleUpload = !!$('<input type="file" multiple>').get(0).files;
+	if (!FileReader || (!Modernizr.draganddrop && !multipleUpload)) {
 		showUnsupportedError();
 		return;
 	}
@@ -94,18 +96,16 @@ $(function() {
 		renderQueue();
 	}
 
-	function addToQueue(e) {
-		e.preventDefault();
-
-		var fr = new FileReader;
-		_.each(e.dataTransfer.files, function(f) {
-			if (_.indexOf(ALLOWED_TYPES, f.type) === -1) {
+	function addToQueue(files) {
+		_.each(files, function(f) {
+		//_.each(e.dataTransfer.files, function(f) {
+			/*if (_.indexOf(ALLOWED_TYPES, f.type) === -1) {
 				console.error('Sorry, file type not allowed.');
 				return;
-			}
+			}*/
 
+			var fr = new FileReader;
 			fr.onloadend = function() {
-				//console.log(f, fr.result);
 				f.dataURL = fr.result;
 				queue.push(f);
 				renderQueue();
@@ -126,7 +126,8 @@ $(function() {
 	}
 
 	var $dropzone = $('<div>', { id: 'gallery-upload' });
-	$('<p>', { html: 'Přetáhni to sem nebo tě přetáhnu.' }).appendTo($dropzone);
+	//$('<p>', { html: 'Přetáhni to sem nebo tě přetáhnu.' }).appendTo($dropzone);
+	$('<input type="file" multiple>').appendTo($dropzone);
 	$('<div>', { 'class': 'status' }).appendTo($dropzone);
 	$('<a>', {
 		href: '#',
@@ -135,10 +136,15 @@ $(function() {
 	}).appendTo($dropzone);
 	$dropzone.appendTo('#recipe-edit');
 
-	$dropzone.bind('dragover', function() { return false; });
+	/*$dropzone.bind('dragover', function() { return false; });
 	$dropzone.bind('dragenter', hintDropzone);
 	$dropzone.bind('dragleave', unhintDropzone);
 	$dropzone.bind('dragend', unhintDropzone);
 
 	$dropzone.get(0).addEventListener('drop', addToQueue, false);
+	*/
+
+	$('input:file').get(0).addEventListener('change', function(e) {
+		addToQueue(e.target.files)
+	}, false);
 });

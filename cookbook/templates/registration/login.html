@@ -8,13 +8,13 @@
 
 <form method="post">
 	{% csrf_token %}
-	<table>
+	<table id="login-form">
 		<tr>
-			<th>{{ form.username.label_tag }}</th>
+			<th>Jméno:</th>
 			<td>{{ form.username }}</td>
 		</tr>
 		<tr>
-			<th>{{ form.password.label_tag }}</th>
+			<th>{{ form.password.label_tag }}:</th>
 			<td>{{ form.password }}</td>
 		</tr>
 		<tr>
@@ -24,7 +24,7 @@
 				{% if next %}
 					<input type="hidden" name="next" value="{{ next }}">
 				{% else %}
-					<input type="hidden" name="next" value="{% url go_home %}">
+					<input type="hidden" name="next" value="{% url dashboard %}">
 				{% endif %}
 			</td>
 		</tr>

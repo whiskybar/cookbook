@@ -27,6 +27,12 @@ em {
 	font-style: italic;
 }
 
+th {
+	font-weight: bold;
+	text-align: right;
+	padding-right: 8px;
+}
+
 a, a:visited, a:active {
     color: blue;
 }
@@ -186,4 +192,10 @@ input[type=submit] {
 
 #recipe-detail ul ul li {
 	list-style: disc inside;
+}
+
+/* login */
+
+#login-form th {
+	width: 80px;
 }

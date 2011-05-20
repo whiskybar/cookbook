@@ -23,6 +23,7 @@ def recipe_search(request):
         Recipe.objects.filter(name__icontains=query, slug__icontains=query)
     #FIXME: continue
 
+
 def recipe_detail(request, author, slug):
     try:
         recipe = Recipe.objects.get(author=author, slug=slug)

@@ -27,7 +27,7 @@ class RecipeForm(forms.Form):
             'name': self.instance.name,
             'slug': self.instance.slug,
             'perex': self.instance.perex,
-            'ingredients': '\n'.join(self.instance.ingredients[0].ingredients)
+            'ingredients': ', '.join(self.instance.ingredients[0].ingredients)
                            if getattr(self.instance, 'ingredients', None) else '',
             'procedure': self.instance.procedure,
             'notes': self.instance.notes,
@@ -51,5 +51,5 @@ class RecipeForm(forms.Form):
             ingredientgroup = IngredientGroup(title='main')
         ingredientgroup.ingredients = filter(bool, self.cleaned_data.get('ingredients', '').split('\n'))
         self.instance.ingredients = [ingredientgroup]
-        self.instance.tags = filter(bool, self.cleaned_data.get('tags', '').split('\n'))
+        self.instance.tags = filter(bool, self.cleaned_data.get('tags', '').split(','))
         self.instance.save()

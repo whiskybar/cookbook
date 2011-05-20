@@ -89,4 +89,5 @@ $(function() {
 	});
 
 	$('.gallery a').fancybox();
+	$('#id_tags').tagsInput();
 });
